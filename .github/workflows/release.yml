@@ -1,0 +1,80 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build plugin and skill zips
+        run: |
+          mkdir -p dist
+
+          # Full plugin bundle (.plugin = zip of everything)
+          zip -r dist/claude-russian-editor.plugin . \
+            -x ".git/*" ".github/*" "dist/*" "install.sh" "*.DS_Store"
+
+          # Individual skill zips
+          for skill_dir in skills/russian-*/; do
+            name=$(basename "$skill_dir")
+            (cd "$skill_dir" && zip -r "../../dist/${name}.zip" SKILL.md references/)
+          done
+
+          echo "## Built artifacts:" >> $GITHUB_STEP_SUMMARY
+          ls -lh dist/ >> $GITHUB_STEP_SUMMARY
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            ## Установка / Installation
+
+            ### Все навыки сразу / Full bundle
+
+            | Файл | Описание |
+            |------|----------|
+            | `claude-russian-editor.plugin` | Плагин для Cowork — откройте файл, он установится автоматически |
+
+            Или одной командой для Claude Code:
+            ```bash
+            curl -sL https://raw.githubusercontent.com/Halfofthesky/claude-russian-editor/main/install.sh | bash
+            ```
+
+            ### Отдельные навыки / Individual skills
+
+            Скачайте нужный zip, распакуйте в папку навыков Claude.
+            Download the zip you need, unzip into your Claude skills folder.
+
+            | Навык | Назначение |
+            |-------|-----------|
+            | `russian-names-capitalization.zip` | Имена, прописные, кавычки |
+            | `russian-abbreviations.zip` | Сокращения и аббревиатуры |
+            | `russian-numbers-dates.zip` | Числа, даты, знаки |
+            | `russian-lists-punctuation.zip` | Перечни и пунктуация |
+            | `russian-citations-bibliography.zip` | Цитаты, сноски, библиография |
+            | `russian-typography-formatting.zip` | Тире, пробелы, выделения |
+            | `russian-editorial-review.zip` | Мета-навык: полная проверка |
+
+            ### Ручная установка / Manual install
+
+            1. Скачайте zip нужного навыка
+            2. Распакуйте в `~/.claude/skills/` (Claude Code) или добавьте через настройки (Cowork)
+            3. Навык станет доступен в следующем чате
+          files: |
+            dist/claude-russian-editor.plugin
+            dist/russian-abbreviations.zip
+            dist/russian-citations-bibliography.zip
+            dist/russian-editorial-review.zip
+            dist/russian-lists-punctuation.zip
+            dist/russian-names-capitalization.zip
+            dist/russian-numbers-dates.zip
+            dist/russian-typography-formatting.zip
