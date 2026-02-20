@@ -18,39 +18,42 @@ jobs:
         run: |
           mkdir -p dist
 
-          # Full bundle (.plugin = zip with everything)
-          zip -r dist/claude-russian-editor.plugin . \
-            -x ".git/*" ".github/*" "dist/*" "install.sh" "*.DS_Store"
+          # --- Inline helper: merge SKILL.md + references into one file ---
+          inline_refs() {
+            local skill_dir="$1" out="$2"
+            cp "$skill_dir/SKILL.md" "$out"
+            if [ -d "$skill_dir/references" ]; then
+              for ref in "$skill_dir"/references/*.md; do
+                [ -f "$ref" ] || continue
+                printf '\n\n---\n\n' >> "$out"
+                cat "$ref" >> "$out"
+              done
+            fi
+          }
 
-          # Individual skill .plugin files
+          # --- Individual skill .zip files (single SKILL.md with refs inlined) ---
           for skill_dir in skills/russian-*/; do
             name=$(basename "$skill_dir")
+            inline_refs "$skill_dir" "/tmp/${name}.md"
             tmpdir=$(mktemp -d)
-
-            # Create plugin structure
-            mkdir -p "$tmpdir/.claude-plugin"
-            mkdir -p "$tmpdir/skills/$name/references"
-
-            # Generate plugin.json
-            cat > "$tmpdir/.claude-plugin/plugin.json" << PJSON
-          {
-            "name": "$name",
-            "version": "${GITHUB_REF_NAME#v}",
-            "description": "Russian editorial skill: $name",
-            "author": { "name": "Stanislav" },
-            "repository": "https://github.com/Halfofthesky/claude-russian-editor",
-            "license": "CC-BY-NC-4.0"
-          }
-          PJSON
-
-            # Copy skill files (SKILL.md + references/)
-            cp "$skill_dir/SKILL.md" "$tmpdir/skills/$name/"
-            cp "$skill_dir"/references/*.md "$tmpdir/skills/$name/references/" 2>/dev/null || true
-
-            # Package as .plugin
-            (cd "$tmpdir" && zip -r "$OLDPWD/dist/${name}.plugin" .)
-            rm -rf "$tmpdir"
+            cp "/tmp/${name}.md" "$tmpdir/SKILL.md"
+            (cd "$tmpdir" && zip "$OLDPWD/dist/${name}.zip" SKILL.md)
+            rm -rf "$tmpdir" "/tmp/${name}.md"
           done
+
+          # --- Full Cowork plugin (.plugin = zip with plugin.json + inlined skills) ---
+          plugin_dir=$(mktemp -d)
+          cp -r .claude-plugin "$plugin_dir/"
+          cp -r commands "$plugin_dir/" 2>/dev/null || true
+          cp LICENSE* README.md "$plugin_dir/" 2>/dev/null || true
+          mkdir -p "$plugin_dir/skills"
+          for skill_dir in skills/russian-*/; do
+            name=$(basename "$skill_dir")
+            mkdir -p "$plugin_dir/skills/$name"
+            inline_refs "$skill_dir" "$plugin_dir/skills/$name/SKILL.md"
+          done
+          (cd "$plugin_dir" && zip -r "$OLDPWD/dist/claude-russian-editor.plugin" .)
+          rm -rf "$plugin_dir"
 
           echo "## Built artifacts:" >> $GITHUB_STEP_SUMMARY
           ls -lh dist/ >> $GITHUB_STEP_SUMMARY
@@ -62,7 +65,7 @@ jobs:
           body: |
             ## Установка / Installation
 
-            ### Все навыки сразу / Full bundle
+            ### Все навыки сразу / Full bundle (Cowork)
 
             Скачайте и откройте — плагин установится автоматически.
             Download and open — the plugin installs automatically.
@@ -73,24 +76,24 @@ jobs:
 
             ### Отдельные навыки / Individual skills
 
-            Скачайте и откройте нужный `.plugin` файл.
-            Download and open the `.plugin` file you need.
+            Скачайте `.zip`, распакуйте и загрузите `SKILL.md` в Claude.
+            Download the `.zip`, unpack, and upload `SKILL.md` to Claude.
 
             | Файл | Назначение |
-            |-------|-----------|
-            | `russian-names-capitalization.plugin` | Имена, прописные, кавычки |
-            | `russian-abbreviations.plugin` | Сокращения и аббревиатуры |
-            | `russian-numbers-dates.plugin` | Числа, даты, знаки |
-            | `russian-lists-punctuation.plugin` | Перечни и пунктуация |
-            | `russian-citations-bibliography.plugin` | Цитаты, сноски, библиография |
-            | `russian-typography-formatting.plugin` | Тире, пробелы, выделения |
-            | `russian-editorial-review.plugin` | Мета-навык: полная проверка |
+            |----------|-----------|
+            | `russian-names-capitalization.zip` | Имена, прописные, кавычки |
+            | `russian-abbreviations.zip` | Сокращения и аббревиатуры |
+            | `russian-numbers-dates.zip` | Числа, даты, знаки |
+            | `russian-lists-punctuation.zip` | Перечни и пунктуация |
+            | `russian-citations-bibliography.zip` | Цитаты, сноски, библиография |
+            | `russian-typography-formatting.zip` | Тире, пробелы, выделения |
+            | `russian-editorial-review.zip` | Мета-навык: полная проверка |
           files: |
             dist/claude-russian-editor.plugin
-            dist/russian-abbreviations.plugin
-            dist/russian-citations-bibliography.plugin
-            dist/russian-editorial-review.plugin
-            dist/russian-lists-punctuation.plugin
-            dist/russian-names-capitalization.plugin
-            dist/russian-numbers-dates.plugin
-            dist/russian-typography-formatting.plugin
+            dist/russian-abbreviations.zip
+            dist/russian-citations-bibliography.zip
+            dist/russian-editorial-review.zip
+            dist/russian-lists-punctuation.zip
+            dist/russian-names-capitalization.zip
+            dist/russian-numbers-dates.zip
+            dist/russian-typography-formatting.zip
