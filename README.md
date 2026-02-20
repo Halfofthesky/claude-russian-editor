@@ -16,19 +16,19 @@ Download `claude-russian-editor.plugin` from [Releases](https://github.com/Halfo
 
 ### Отдельные навыки / Individual skills
 
-Нужен только один навык? Скачайте его zip из [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) и загрузите в Claude.
+Нужен только один навык? Скачайте его `.plugin` из [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) и откройте — установится автоматически.
 
-Need just one skill? Download its zip from [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) and upload it to Claude.
+Need just one skill? Download its `.plugin` from [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) and open it — installs automatically.
 
 | Файл / File | Навык / Skill |
 |---|---|
-| `russian-names-capitalization.zip` | Имена, прописные, кавычки — Names, capitalization |
-| `russian-abbreviations.zip` | Сокращения — Abbreviations |
-| `russian-numbers-dates.zip` | Числа, даты, знаки — Numbers, dates |
-| `russian-lists-punctuation.zip` | Перечни — Lists & punctuation |
-| `russian-citations-bibliography.zip` | Цитаты, библиография — Citations |
-| `russian-typography-formatting.zip` | Типографика — Typography |
-| `russian-editorial-review.zip` | Мета-навык: полная проверка — Full review |
+| `russian-names-capitalization.plugin` | Имена, прописные, кавычки — Names, capitalization |
+| `russian-abbreviations.plugin` | Сокращения — Abbreviations |
+| `russian-numbers-dates.plugin` | Числа, даты, знаки — Numbers, dates |
+| `russian-lists-punctuation.plugin` | Перечни — Lists & punctuation |
+| `russian-citations-bibliography.plugin` | Цитаты, библиография — Citations |
+| `russian-typography-formatting.plugin` | Типографика — Typography |
+| `russian-editorial-review.plugin` | Мета-навык: полная проверка — Full review |
 
 ### Claude Code
 
