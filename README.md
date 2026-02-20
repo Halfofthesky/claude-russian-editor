@@ -8,30 +8,17 @@ A set of Claude skills implementing Russian editorial and publishing standards b
 
 ## Установка / Installation
 
-### Cowork (рекомендуется / recommended)
+### Все навыки сразу / Full bundle
 
-Скачайте файл `claude-russian-editor.plugin` из [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) и откройте его — плагин установится автоматически.
+Скачайте `claude-russian-editor.plugin` из [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) и откройте файл — плагин установится автоматически.
 
-Download `claude-russian-editor.plugin` from [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) and open it — the plugin installs automatically.
-
-### Claude Code (одна команда / one-liner)
-
-```bash
-curl -sL https://raw.githubusercontent.com/Halfofthesky/claude-russian-editor/main/install.sh | bash
-```
-
-### Вручную / Manual
-
-```bash
-git clone https://github.com/Halfofthesky/claude-russian-editor.git
-cp -r claude-russian-editor ~/.claude/plugins/claude-russian-editor
-```
+Download `claude-russian-editor.plugin` from [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) and open the file — the plugin installs automatically.
 
 ### Отдельные навыки / Individual skills
 
-Не нужен весь набор? Скачайте только нужный навык из [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases):
+Нужен только один навык? Скачайте его zip из [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) и загрузите в Claude.
 
-Don't need the full set? Download just the skill you need from [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases):
+Need just one skill? Download its zip from [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) and upload it to Claude.
 
 | Файл / File | Навык / Skill |
 |---|---|
@@ -43,9 +30,11 @@ Don't need the full set? Download just the skill you need from [Releases](https:
 | `russian-typography-formatting.zip` | Типографика — Typography |
 | `russian-editorial-review.zip` | Мета-навык: полная проверка — Full review |
 
-Распакуйте zip в папку навыков: `~/.claude/skills/имя-навыка/`
+### Claude Code
 
-Unzip into your skills folder: `~/.claude/skills/skill-name/`
+```bash
+curl -sL https://raw.githubusercontent.com/Halfofthesky/claude-russian-editor/main/install.sh | bash
+```
 
 ---
 
@@ -86,48 +75,6 @@ Unzip into your skills folder: `~/.claude/skills/skill-name/`
 - «Как сократить "страница"?» → `russian-abbreviations`
 - «Нужна ли прописная в "министерство обороны"?» → `russian-names-capitalization`
 - «Как оформить перечень?» → `russian-lists-punctuation`
-
-## Структура / Structure
-
-```
-claude-russian-editor/
-├── .claude-plugin/
-│   └── plugin.json                  # Plugin manifest
-├── commands/
-│   └── review.md                    # /review slash command
-├── skills/
-│   ├── russian-names-capitalization/
-│   │   ├── SKILL.md
-│   │   └── references/
-│   │       └── names-rules.md
-│   ├── russian-abbreviations/
-│   │   ├── SKILL.md
-│   │   └── references/
-│   │       └── abbreviation-rules.md
-│   ├── russian-numbers-dates/
-│   │   ├── SKILL.md
-│   │   └── references/
-│   │       └── numbers-dates-rules.md
-│   ├── russian-lists-punctuation/
-│   │   ├── SKILL.md
-│   │   └── references/
-│   │       └── lists-rules.md
-│   ├── russian-citations-bibliography/
-│   │   ├── SKILL.md
-│   │   └── references/
-│   │       ├── citation-rules.md
-│   │       └── bibliography-rules.md
-│   ├── russian-typography-formatting/
-│   │   ├── SKILL.md
-│   │   └── references/
-│   │       └── typography-rules.md
-│   └── russian-editorial-review/
-│       ├── SKILL.md
-│       └── references/
-│           └── review-methodology.md
-├── install.sh
-└── README.md
-```
 
 ## Источник / Source
 
