@@ -18,34 +18,34 @@ jobs:
         run: |
           mkdir -p dist
 
-          # Full bundle (.plugin = zip with plugin.json + all skills)
+          # Full bundle (.plugin = zip with everything)
           zip -r dist/claude-russian-editor.plugin . \
             -x ".git/*" ".github/*" "dist/*" "install.sh" "*.DS_Store"
 
-          # Individual skill .plugin files (each with its own plugin.json)
+          # Individual skill .plugin files
           for skill_dir in skills/russian-*/; do
             name=$(basename "$skill_dir")
             tmpdir=$(mktemp -d)
 
             # Create plugin structure
             mkdir -p "$tmpdir/.claude-plugin"
-            mkdir -p "$tmpdir/skills/$name"
+            mkdir -p "$tmpdir/skills/$name/references"
 
-            # Generate plugin.json for this skill
-            desc=$(head -5 "$skill_dir/SKILL.md" | grep "^description:" | sed 's/description: *//')
+            # Generate plugin.json
             cat > "$tmpdir/.claude-plugin/plugin.json" << PJSON
           {
             "name": "$name",
             "version": "${GITHUB_REF_NAME#v}",
-            "description": "$desc",
+            "description": "Russian editorial skill: $name",
             "author": { "name": "Stanislav" },
             "repository": "https://github.com/Halfofthesky/claude-russian-editor",
             "license": "CC-BY-NC-4.0"
           }
           PJSON
 
-            # Copy skill file
+            # Copy skill files (SKILL.md + references/)
             cp "$skill_dir/SKILL.md" "$tmpdir/skills/$name/"
+            cp "$skill_dir"/references/*.md "$tmpdir/skills/$name/references/" 2>/dev/null || true
 
             # Package as .plugin
             (cd "$tmpdir" && zip -r "$OLDPWD/dist/${name}.plugin" .)
@@ -70,11 +70,6 @@ jobs:
             | Файл | Описание |
             |------|----------|
             | `claude-russian-editor.plugin` | Все 7 навыков + команда `/review` |
-
-            Или одной командой для Claude Code:
-            ```bash
-            curl -sL https://raw.githubusercontent.com/Halfofthesky/claude-russian-editor/main/install.sh | bash
-            ```
 
             ### Отдельные навыки / Individual skills
 
