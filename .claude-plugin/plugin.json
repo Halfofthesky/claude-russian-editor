@@ -1,0 +1,19 @@
+{
+  "name": "claude-russian-editor",
+  "version": "1.0.0",
+  "description": "Russian editorial and publishing standards based on Milchin & Cheltsova's handbook. Comprehensive text formatting review: capitalization, abbreviations, numbers, lists, citations, typography.",
+  "author": {
+    "name": "Stanislav"
+  },
+  "repository": "https://github.com/Halfofthesky/claude-russian-editor",
+  "keywords": [
+    "russian",
+    "editing",
+    "typography",
+    "publishing",
+    "milchin",
+    "редактура",
+    "оформление"
+  ],
+  "license": "MIT"
+}

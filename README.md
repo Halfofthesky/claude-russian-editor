@@ -6,6 +6,29 @@ A set of Claude skills implementing Russian editorial and publishing standards b
 
 ---
 
+## Установка / Installation
+
+### Cowork (рекомендуется / recommended)
+
+Скачайте файл `claude-russian-editor.plugin` из [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) и откройте его — плагин установится автоматически.
+
+Download `claude-russian-editor.plugin` from [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases) and open it — the plugin installs automatically.
+
+### Claude Code (одна команда / one-liner)
+
+```bash
+curl -sL https://raw.githubusercontent.com/Halfofthesky/claude-russian-editor/main/install.sh | bash
+```
+
+### Вручную / Manual
+
+```bash
+git clone https://github.com/Halfofthesky/claude-russian-editor.git
+cp -r claude-russian-editor ~/.claude/plugins/claude-russian-editor
+```
+
+---
+
 ## Навыки / Skills
 
 | # | Навык / Skill | Назначение / Purpose |
@@ -16,20 +39,25 @@ A set of Claude skills implementing Russian editorial and publishing standards b
 | 4 | `russian-lists-punctuation` | Перечни: нумерация, маркеры, пунктуация, регистр — Lists: numbering, markers, punctuation, capitalization |
 | 5 | `russian-citations-bibliography` | Цитаты, сноски, библиографические описания по ГОСТ — Citations, footnotes, GOST bibliographic descriptions |
 | 6 | `russian-typography-formatting` | Выделения, заголовки, тире/дефис, неразрывные пробелы — Emphasis, headings, dashes, non-breaking spaces |
-| 7 | `russian-editorial-review` | **Мета-навык**: комплексная проверка оформления, паспорт оформления, вертикальный контроль — **Meta-skill**: comprehensive editorial review, formatting passport, vertical control |
+| 7 | `russian-editorial-review` | **Мета-навык**: комплексная проверка оформления — **Meta-skill**: comprehensive editorial review |
 
 ## Как использовать / How to use
 
-### Комплексная проверка (рекомендуется)
+### Команда `/review` — быстрый старт
 
-Вызовите навык `russian-editorial-review` — он организует полный цикл проверки, обращаясь к остальным шести навыкам по мере необходимости.
+```
+/review mytext.md
+```
 
-Trigger the `russian-editorial-review` skill — it orchestrates a full review cycle, pulling rules from the other six skills as needed.
+Запускает полную проверку оформления файла. Runs a full formatting review of the file.
+
+### Комплексная проверка в чате
 
 Примеры запросов / Example prompts:
+
 - «Проверь оформление этого текста по Мильчину»
 - «Приведи текст к издательским нормам»
-- «Отредактируй оформление»
+- "Review this Russian text for editorial standards"
 
 ### Точечная проверка
 
@@ -42,41 +70,44 @@ Trigger the `russian-editorial-review` skill — it orchestrates a full review c
 ## Структура / Structure
 
 ```
-russian-editing-skills/
-├── russian-names-capitalization/
-│   ├── SKILL.md
-│   └── references/
-│       └── names-rules.md          # 1100 строк правил
-├── russian-abbreviations/
-│   ├── SKILL.md
-│   └── references/
-│       └── abbreviation-rules.md   # 455 строк
-├── russian-numbers-dates/
-│   ├── SKILL.md
-│   └── references/
-│       └── numbers-dates-rules.md  # 286 строк
-├── russian-lists-punctuation/
-│   ├── SKILL.md
-│   └── references/
-│       └── lists-rules.md          # 267 строк
-├── russian-citations-bibliography/
-│   ├── SKILL.md
-│   └── references/
-│       ├── citation-rules.md       # 276 строк
-│       └── bibliography-rules.md   # 364 строк
-├── russian-typography-formatting/
-│   ├── SKILL.md
-│   └── references/
-│       └── typography-rules.md     # 168 строк
-└── russian-editorial-review/
-    ├── SKILL.md
-    └── references/
-        └── review-methodology.md   # 115 строк
+claude-russian-editor/
+├── .claude-plugin/
+│   └── plugin.json                  # Plugin manifest
+├── commands/
+│   └── review.md                    # /review slash command
+├── skills/
+│   ├── russian-names-capitalization/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       └── names-rules.md
+│   ├── russian-abbreviations/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       └── abbreviation-rules.md
+│   ├── russian-numbers-dates/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       └── numbers-dates-rules.md
+│   ├── russian-lists-punctuation/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       └── lists-rules.md
+│   ├── russian-citations-bibliography/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       ├── citation-rules.md
+│   │       └── bibliography-rules.md
+│   ├── russian-typography-formatting/
+│   │   ├── SKILL.md
+│   │   └── references/
+│   │       └── typography-rules.md
+│   └── russian-editorial-review/
+│       ├── SKILL.md
+│       └── references/
+│           └── review-methodology.md
+├── install.sh
+└── README.md
 ```
-
-Каждый навык содержит:
-- `SKILL.md` — основные правила и инструкции (загружается в контекст при вызове)
-- `references/` — подробные справочники (загружаются по запросу для сложных случаев)
 
 ## Источник / Source
 
@@ -85,5 +116,7 @@ russian-editing-skills/
 Правила дистиллированы из полного текста справочника в формат, пригодный для использования Claude в качестве инструкций.
 
 ## Лицензия / License
+
+MIT. See [LICENSE](LICENSE).
 
 Правила и нормы русского языка не являются объектом авторского права. Данный набор навыков представляет собой самостоятельную переработку и систематизацию общеизвестных редакционных норм в формат инструкций для языковой модели.
