@@ -137,6 +137,6 @@ claude-russian-editor/
 
 ## Лицензия / License
 
-MIT. See [LICENSE](LICENSE).
+CC BY-NC 4.0 — [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
-Правила и нормы русского языка не являются объектом авторского права. Данный набор навыков представляет собой самостоятельную переработку и систематизацию общеизвестных редакционных норм в формат инструкций для языковой модели.
+Свободное использование с указанием авторства в некоммерческих целях. Free to use with attribution for non-commercial purposes.
