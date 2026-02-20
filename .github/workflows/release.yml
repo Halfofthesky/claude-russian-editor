@@ -22,10 +22,10 @@ jobs:
           zip -r dist/claude-russian-editor.plugin . \
             -x ".git/*" ".github/*" "dist/*" "install.sh" "*.DS_Store"
 
-          # Individual skill zips
+          # Individual skill zips (each skill is a single SKILL.md)
           for skill_dir in skills/russian-*/; do
             name=$(basename "$skill_dir")
-            (cd "$skill_dir" && zip -r "../../dist/${name}.zip" SKILL.md references/)
+            (cd "$skill_dir" && zip "../../dist/${name}.zip" SKILL.md)
           done
 
           echo "## Built artifacts:" >> $GITHUB_STEP_SUMMARY
