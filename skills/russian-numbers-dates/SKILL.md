@@ -96,4 +96,6 @@ description: |
 
 ## Подробные правила
 
-Полные правила со всеми частными случаями: `references/numbers-dates-rules.md`
+Полные правила со всеми частными случаями: `${CLAUDE_PLUGIN_ROOT}/skills/russian-numbers-dates/references/numbers-dates-rules.md`
+
+> При использовании вне плагина: загрузите в чат файл `references/numbers-dates-rules.md` из этой же папки.

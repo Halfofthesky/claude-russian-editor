@@ -64,11 +64,11 @@ jobs:
             | `russian-typography-formatting.zip` | Тире, пробелы, выделения |
             | `russian-editorial-review.zip` | Мета-навык: полная проверка |
 
-            ### Ручная установка / Manual install
+            ### Как использовать отдельный навык / How to use an individual skill
 
-            1. Скачайте zip нужного навыка
-            2. Распакуйте в `~/.claude/skills/` (Claude Code) или добавьте через настройки (Cowork)
-            3. Навык станет доступен в следующем чате
+            1. Скачайте zip нужного навыка / Download the skill zip
+            2. Загрузите zip в чат с Claude / Upload the zip to a chat with Claude
+            3. Claude автоматически прочитает все файлы / Claude will read all files automatically
           files: |
             dist/claude-russian-editor.plugin
             dist/russian-abbreviations.zip

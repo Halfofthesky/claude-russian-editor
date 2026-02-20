@@ -129,5 +129,7 @@ description: |
 
 ## Подробные правила
 
-- Правила цитирования и примечаний: `references/citation-rules.md`
-- Правила библиографического описания: `references/bibliography-rules.md`
+- Правила цитирования и примечаний: `${CLAUDE_PLUGIN_ROOT}/skills/russian-citations-bibliography/references/citation-rules.md`
+- Правила библиографического описания: `${CLAUDE_PLUGIN_ROOT}/skills/russian-citations-bibliography/references/bibliography-rules.md`
+
+> При использовании вне плагина: загрузите в чат оба файла из папки `references/`.

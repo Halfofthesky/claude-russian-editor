@@ -86,4 +86,6 @@ description: |
 
 ## Подробные правила
 
-Полные списки сокращений, правила для прилагательных и причастий, специальные сокращения: `references/abbreviation-rules.md`
+Полные списки сокращений, правила для прилагательных и причастий, специальные сокращения: `${CLAUDE_PLUGIN_ROOT}/skills/russian-abbreviations/references/abbreviation-rules.md`
+
+> При использовании вне плагина: загрузите в чат файл `references/abbreviation-rules.md` из этой же папки.

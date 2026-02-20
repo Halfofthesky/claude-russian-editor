@@ -118,4 +118,6 @@ description: |
 
 ## Подробные правила
 
-Полные правила с разбором всех вариантов: `references/lists-rules.md`
+Полные правила с разбором всех вариантов: `${CLAUDE_PLUGIN_ROOT}/skills/russian-lists-punctuation/references/lists-rules.md`
+
+> При использовании вне плагина: загрузите в чат файл `references/lists-rules.md` из этой же папки.

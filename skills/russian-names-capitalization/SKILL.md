@@ -70,4 +70,6 @@ description: |
 
 ## Подробные правила
 
-Для полного свода правил с примерами по всем 18 категориям имён загрузи: `references/names-rules.md`
+Для полного свода правил с примерами по всем 18 категориям имён загрузи: `${CLAUDE_PLUGIN_ROOT}/skills/russian-names-capitalization/references/names-rules.md`
+
+> При использовании вне плагина: загрузите в чат файл `references/names-rules.md` из этой же папки.

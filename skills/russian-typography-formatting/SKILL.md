@@ -114,4 +114,6 @@ description: |
 
 ## Подробные правила
 
-Полные правила выделений, заголовков, эпиграфов и типографики: `references/typography-rules.md`
+Полные правила выделений, заголовков, эпиграфов и типографики: `${CLAUDE_PLUGIN_ROOT}/skills/russian-typography-formatting/references/typography-rules.md`
+
+> При использовании вне плагина: загрузите в чат файл `references/typography-rules.md` из этой же папки.
