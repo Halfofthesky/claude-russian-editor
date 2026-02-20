@@ -27,6 +27,26 @@ git clone https://github.com/Halfofthesky/claude-russian-editor.git
 cp -r claude-russian-editor ~/.claude/plugins/claude-russian-editor
 ```
 
+### Отдельные навыки / Individual skills
+
+Не нужен весь набор? Скачайте только нужный навык из [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases):
+
+Don't need the full set? Download just the skill you need from [Releases](https://github.com/Halfofthesky/claude-russian-editor/releases):
+
+| Файл / File | Навык / Skill |
+|---|---|
+| `russian-names-capitalization.zip` | Имена, прописные, кавычки — Names, capitalization |
+| `russian-abbreviations.zip` | Сокращения — Abbreviations |
+| `russian-numbers-dates.zip` | Числа, даты, знаки — Numbers, dates |
+| `russian-lists-punctuation.zip` | Перечни — Lists & punctuation |
+| `russian-citations-bibliography.zip` | Цитаты, библиография — Citations |
+| `russian-typography-formatting.zip` | Типографика — Typography |
+| `russian-editorial-review.zip` | Мета-навык: полная проверка — Full review |
+
+Распакуйте zip в папку навыков: `~/.claude/skills/имя-навыка/`
+
+Unzip into your skills folder: `~/.claude/skills/skill-name/`
+
 ---
 
 ## Навыки / Skills
